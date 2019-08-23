@@ -7,15 +7,16 @@ const App: React.FC = () => {
 };
 
 export default App;
-class Square extends React.Component {
+class Square extends React.Component<{ value: number }> {
+    //propsの型を指定
     render() {
-        return <button className="square">{/* TODO */}</button>;
+        return <button className="square">{this.props.value}</button>;
     }
 }
 
 class Board extends React.Component {
     renderSquare(i: number) {
-        return <Square />;
+        return <Square value={i} />;
     }
 
     render() {
