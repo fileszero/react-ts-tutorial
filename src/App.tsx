@@ -1,30 +1,41 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { string } from 'prop-types';
 
 const App: React.FC = () => {
     return <Game />;
 };
 
 export default App;
-class Square extends React.Component<{ value: number }, { value: string }> {
-    //propsの型とstateの型を指定
-    constructor(props: { value: number }) {
+class Square extends React.Component<{ value: string; onclick: () => void }> {
+    //propsの型を指定
+    constructor(props: { value: string; onclick: () => void }) {
         super(props);
-        this.state = { value: '' };
     }
     render() {
         return (
-            <button className="square" onClick={() => this.setState({ value: 'X' })}>
-                {this.state.value}
+            <button className="square" onClick={this.props.onclick}>
+                {this.props.value}
             </button>
         );
     }
 }
 
-class Board extends React.Component {
+class Board extends React.Component<{}, { squares: string[] }> {
+    constructor(props: {}) {
+        super(props);
+        this.state = {
+            squares: Array<string>(9).fill('')
+        };
+    }
     renderSquare(i: number) {
-        return <Square value={i} />;
+        return <Square value={this.state.squares[i]} onclick={() => this.handleClick(i)} />;
+    }
+    handleClick(i: number) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({ squares: squares });
     }
 
     render() {
