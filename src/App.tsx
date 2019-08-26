@@ -8,18 +8,12 @@ const App: React.FC = () => {
 };
 
 export default App;
-class Square extends React.Component<{ value: string; onclick: () => void }> {
-    //propsの型を指定
-    constructor(props: { value: string; onclick: () => void }) {
-        super(props);
-    }
-    render() {
-        return (
-            <button className="square" onClick={this.props.onclick}>
-                {this.props.value}
-            </button>
-        );
-    }
+function Square(props: { value: string; onclick: () => void }) {
+    return (
+        <button className="square" onClick={props.onclick}>
+            {props.value}
+        </button>
+    );
 }
 
 class Board extends React.Component<{}, { squares: string[] }> {
