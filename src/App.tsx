@@ -7,12 +7,16 @@ const App: React.FC = () => {
 };
 
 export default App;
-class Square extends React.Component<{ value: number }> {
-    //propsの型を指定
+class Square extends React.Component<{ value: number }, { value: string }> {
+    //propsの型とstateの型を指定
+    constructor(props: { value: number }) {
+        super(props);
+        this.state = { value: '' };
+    }
     render() {
         return (
-            <button className="square" onClick={() => alert('click')}>
-                {this.props.value}
+            <button className="square" onClick={() => this.setState({ value: 'X' })}>
+                {this.state.value}
             </button>
         );
     }
