@@ -19,7 +19,7 @@ interface BoardProp {
     onClick?: (arg0: number) => void;
 }
 
-class Board extends React.Component<BoardProp, { squares: string[]; xIsNext: boolean }> {
+class Board extends React.Component<BoardProp> {
     renderSquare(i: number) {
         return (
             <Square value={this.props.squares[i]} onclick={() => (this.props.onClick ? this.props.onClick(i) : null)} />
